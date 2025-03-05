@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiveDoc - Predict Disease</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #b3ddf2;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #003366;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .predict-btn-nav {
+            background-color: white;
+            border: 2px solid #003366;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 50px;
+        }
+        .upload-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+        }
+        h2 {
+            color: #1d2b64;
+            font-size: 24px;
+        }
+        input[type="file"] {
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .predict-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #1d2b64;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .predict-btn:hover {
+            background-color: #14204a;
+        }
+        .preview-container {
+            margin-top: 20px;
+            width: 100%;
+            max-height: 200px;
+            overflow: hidden;
+            display: none;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .preview-container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .image-container {
+            width: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                document.getElementById('previewContainer').style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div>LIVEDOC</div>
+        <div class="nav-links">
+            <a href="#">About Us</a>
+            <a href="#">Help</a>
+            <a href="#">Contact</a>
+            <button class="predict-btn-nav">Predict</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Medical Consultation Image (Right Side) -->
+        <div class="image-container">
+            <img src="dc.png" alt="Medical Consultation">
+        </div>
+        <!-- Upload Box (Left Side) -->
+        <div class="upload-box">
+            <h2>Please upload the image</h2>
+            <form action="output.html" method="get">
+                <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)" required>
+                <div class="preview-container" id="previewContainer">
+                    <img id="imagePreview" alt="Uploaded Image Preview">
+                </div>
+                <button type="submit" class="predict-btn">Predict</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
